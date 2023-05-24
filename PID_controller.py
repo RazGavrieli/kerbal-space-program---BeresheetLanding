@@ -32,7 +32,10 @@ class PIDController:
         self.last_time = time
 
         proportional = self.kp * error
-        derivative = self.kd * de / dt
+        if dt == 0:
+            derivative = 0
+        else:
+            derivative = self.kd * de / dt
         integral = self.ki * self.integral_error
         output = proportional + derivative + integral
 

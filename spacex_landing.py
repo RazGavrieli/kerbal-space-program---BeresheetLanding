@@ -1,16 +1,16 @@
 import krpc
 import time
-from helper_functions import print_results
+from helper_functions import plot_results
 from PID_controller import PIDController
-
+ZERO_ALT = 9.125031
 
 def target_vs_function(alt):
     if alt > 475:
         return 9999
-    if alt > 20:
-        return 5
+    if alt > 15:
+        return 4
     else:
-        return -1
+        return 0
 
 if __name__ == "__main__":
     conn = krpc.connect()
@@ -29,7 +29,6 @@ if __name__ == "__main__":
 
     # set up PID controller
     pidcontroller = PIDController(0.05, 0.00, 0.025) # rough earth values
-    lastNN = 0
     NN = 0
     times = []
     speeds = []
@@ -51,13 +50,14 @@ if __name__ == "__main__":
         print(str(time.time())+"-:-", "VS: " + str(vs), "HS: " + str(hs),"ALT: " + str(alt))
 
         # handle direction of vessel
-        if alt < 500:
-            try:
-                print("SAS STABILITY")
-                vessel.control.sas_mode = vessel.control.sas_mode.stability_assist
-            except:
-                print("SAS ERROR")
-        elif vessel.control.sas_mode != vessel.control.sas_mode.retrograde:
+        # if alt < 500:
+        #     if vessel.control.sas_mode != vessel.control.sas_mode.stability_assist:
+        #         try:
+        #             print("SAS STABILITY")
+        #             vessel.control.sas_mode = vessel.control.sas_mode.stability_assist
+        #         except:
+        #             print("SAS ERROR")
+        if vessel.control.sas_mode != vessel.control.sas_mode.retrograde:
             try:
                 print("SAS RETROGRADE")
                 vessel.control.sas_mode = vessel.control.sas_mode.retrograde
@@ -68,13 +68,12 @@ if __name__ == "__main__":
         if alt < 100 and not vessel.control.legs:
             vessel.control.legs = True
 
+
         target_vs = target_vs_function(alt)
         NN = pidcontroller.compute(vs-target_vs, time.time())
         print("THRUST: " + str(NN), "TARGET VS: " + str(target_vs))
-        if NN != lastNN:
-            vessel.control.throttle = NN
-            lastNN = NN
+        vessel.control.throttle = NN
 
     vessel.control.throttle = 0
     print("landed!")
-    print_results(times, speeds, alts, thrusts)
+    plot_results(times, speeds, alts, thrusts)
