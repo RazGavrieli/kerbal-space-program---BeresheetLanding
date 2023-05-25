@@ -31,6 +31,7 @@ Once you've added the contents of the mod to the GameData folder, your KSP insta
 <p align="center">
 <img width="280" alt="image" src="https://github.com/RazGavrieli/kerbal-space-program---BeresheetLanding/assets/90526270/bba8fffb-2cb8-4e9f-99fe-21655a33f813">
 </p>
+
 ## Moon landing scenario 
 
 In order to land a vessel on the surface of the moon, we first have to reach the moon. Luckily, KSP provides preset scenarios, and one of them is close to what we need. The "Mun Orbit" scenario starts at a low moon orbit. We need to decouple from the main command module, burn in retrograde to slow down, de-orbit, and begin the descent toward the moon.
@@ -81,6 +82,7 @@ vessel.control.throttle = 0.5
 After running this code, you should see that the vessel’s engine is at 0.5 capacity. 
 
 **Troubleshooting**
+
 If you can’t seem to connect to the server from the Python code, try changing the server’s settings in the KRPC’s window within the game.
 
 ## Getting Started
@@ -123,7 +125,7 @@ We can see that the speed reduces constantly and there are no jumps in speed or 
 
 This method results in a successful landing with more fuel, and also, we can change starting values and still get successful landings. The PID controller can see the current error and output a thrust value that takes into account the change in error. By that, we get a more robust landing procedure.
 
-## Bonus Section - Land a Rocket SpaceX Style
+# Bonus Section - Land a Rocket SpaceX Style
 Kerbal Space Program has provided us with many preset scenarios. One of those scenarios is landing a rocket back onto Earth after it has launched another vessel. This is done so we can refuel the rocket and use it again in the future!
   <p align="center">
 <img width="462" alt="image" src="https://github.com/RazGavrieli/kerbal-space-program---BeresheetLanding/assets/90526270/f1ac4f0e-54bf-4605-bcae-31a21cee3644">
@@ -141,3 +143,10 @@ Execute the script within the 'Powered Landing' scenario. You will observe that 
 </p>
 Despite significant fluctuation in engine thrust (NN) values towards the end, the vessel's speed consistently decreases.
 
+# Bonus Section - PID simulation
+In this section, we will showcase a precedure to quickly fine-tune PID parameters. Doing this manually is a fun but time-consuming process. We will use a simulation to quickly find the best parameters for our PID controller. 
+Use this script: [PID Simulation Script](https://github.com/RazGavrieli/kerbal-space-program---BeresheetLanding/blob/main/pid_simulation.py)
+
+In this script, we simulate the enviorment, setting a specific gravity value. We then initiate a vessel with Max thrust and a specific mass. Then, a PID controller is used to control the vessel's vertical speed, while the enviorment returns the current vertical speed and altitude.
+
+Brute-forcing the PID parameters is a simple way to find the best parameters. We will use a nested for loop to iterate over the parameters and find the best ones.

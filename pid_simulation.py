@@ -57,7 +57,6 @@ if __name__ == "__main__":
             samples = 0
             simulation.reset()
             while simulation.height>0:
-
                 time += 0.1
                 samples += 1
                 NN = pid.compute(simulation.velocity-targetVelocity, time)
