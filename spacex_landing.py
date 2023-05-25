@@ -2,7 +2,6 @@ import krpc
 import time
 from helper_functions import plot_results
 from PID_controller import PIDController
-ZERO_ALT = 9.125031
 
 def target_vs_function(alt):
     if alt > 475:
@@ -49,14 +48,7 @@ if __name__ == "__main__":
         # print all info
         print(str(time.time())+"-:-", "VS: " + str(vs), "HS: " + str(hs),"ALT: " + str(alt))
 
-        # handle direction of vessel
-        # if alt < 500:
-        #     if vessel.control.sas_mode != vessel.control.sas_mode.stability_assist:
-        #         try:
-        #             print("SAS STABILITY")
-        #             vessel.control.sas_mode = vessel.control.sas_mode.stability_assist
-        #         except:
-        #             print("SAS ERROR")
+        # handle direction of rocket
         if vessel.control.sas_mode != vessel.control.sas_mode.retrograde:
             try:
                 print("SAS RETROGRADE")
@@ -75,5 +67,6 @@ if __name__ == "__main__":
         vessel.control.throttle = NN
 
     vessel.control.throttle = 0
+    vessel.control.sas = False
     print("landed!")
     plot_results(times, speeds, alts, thrusts)

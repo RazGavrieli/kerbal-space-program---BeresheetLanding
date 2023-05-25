@@ -1,4 +1,3 @@
-import krpc
 import time
 
 def decouple_and_deorbit(vessel, conn):

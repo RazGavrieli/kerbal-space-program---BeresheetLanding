@@ -8,7 +8,6 @@ from helper_functions import decouple_and_deorbit, plot_results
 if __name__ == "__main__":
     conn = krpc.connect()
     vessel = conn.space_center.active_vessel
-    print(vessel.name)
     vessel, engine, body_frame = decouple_and_deorbit(vessel)
     NN = 0
     times = []

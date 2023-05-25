@@ -3,7 +3,6 @@
 # We will brute-force the PID controller parameters to find the best ones for the job.
 
 from PID_controller import PIDController
-
 import numpy as np
 
 class simulatorEnviorment:
@@ -43,13 +42,12 @@ class simulatorEnviorment:
 if __name__ == "__main__":
     simulation = simulatorEnviorment(mass=500, max_thrust=400, gravity=9.81)
 
-    possibleValues = np.arange(0.00, 1, 0.05)
+    possibleValues = np.arange(0.00, 1, 0.01)
     bestAverageSpeed = 99999
     bestValues = [0, 0]
     targetVelocity = 10
     for i in possibleValues:
         for j in possibleValues:
-            # pid = PIDController(0.4, 0.0, 0.2) # moon
             # print("Testing values: " + str(i) + " " + str(j))
             pid = PIDController(i, 0.0, j) 
             NN = 0
@@ -69,8 +67,6 @@ if __name__ == "__main__":
             averageSpeed /= samples
             # print("Average speed: " + str(averageSpeed), "Samples: " + str(samples))
 
-            if i == 0.4 and j == 0.2:
-                print("Average speed: " + str(averageSpeed), "Samples: " + str(samples))
             if samples == 0:
                 continue
             if abs(averageSpeed - targetVelocity) < abs(bestAverageSpeed - targetVelocity):
