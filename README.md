@@ -4,7 +4,8 @@ By the end of this section, you will be able to write Python code that will land
 
 Using KSP as a simulation sandbox, we can observe our code in a 3D simulated environment and learn about how changes in our code affect the landing. This guide covers the installation process of the requirements needed to control a spacecraft in KSP with Python code. Then, it showcases a scenario that represents the Beresheet Landing scenario. After that, we will make changes to the code and observe them in real-time.
 
-![IMAGE OF MOON LANDING HERE](insert-image-url-here)
+<img width="541" alt="image" src="https://github.com/RazGavrieli/kerbal-space-program---BeresheetLanding/assets/90526270/36a4a3d6-792a-4a7a-ac6c-669e2cf64eb2">
+
 
 ## Installation and requirements 
 
@@ -28,8 +29,8 @@ Once you've added the contents of the mod to the GameData folder, your KSP insta
 1. Launch the game and open a saved game in flight mode. If you don't have a save or are unsure how to do so, you can go into the scenarios section and launch one of the scenarios. You will be controlling a vessel.
 2. At this point, the KRPC window should be visible on the screen.
 
-![IMAGE OF KRPC WINDOW GOES HERE](insert-image-url-here)
-
+<img width="280" alt="image" src="https://github.com/RazGavrieli/kerbal-space-program---BeresheetLanding/assets/90526270/bba8fffb-2cb8-4e9f-99fe-21655a33f813">
+  
 ## Moon landing scenario 
 
 In order to land a vessel on the surface of the moon, we first have to reach the moon. Luckily, KSP provides preset scenarios, and one of them is close to what we need. The "Mun Orbit" scenario starts at a low moon orbit. We need to decouple from the main command module, burn in retrograde to slow down, de-orbit, and begin the descent toward the moon.
@@ -38,7 +39,7 @@ In order to land a vessel on the surface of the moon, we first have to reach the
 
 The first step is to manually decouple from the main command module and take control over the lander module. Right-click on the command module (triangle-looking pod) and click on "Transfer Crew." Then, click "Transfer" next to the first crew member and finally click on the lander module.
 
-![IMAGE SHOWING HOW TO TRANSFER HERE](insert-image-url-here)
+<img width="464" alt="image" src="https://github.com/RazGavrieli/kerbal-space-program---BeresheetLanding/assets/90526270/dfd88235-758b-4126-9729-ec53d4c64710">
 
 For convenience, you can save the game after transferring the crew, so you won't have to repeat the process every time. Press the Escape key and select "Save."
 
@@ -98,7 +99,7 @@ The code for the naive approach is available at: [Naive Approach Code](https://g
 
 Let's take a look at the results, the results show 3 parameters: Altitude (ALT), Vertical Speed (VS) and Engine Thrust (NN).
 
-![Naive Results](IMAGE URL HERE) 
+<img width="578" alt="image" src="https://github.com/RazGavrieli/kerbal-space-program---BeresheetLanding/assets/90526270/a7a818af-6fbd-48bc-b22e-145133a34156">
 
 Clearly, this approach is not efficient. The speed is jumping around and not constantly going in a downward direction. The engine jumps a lot between low and high values. 
 
@@ -116,7 +117,7 @@ The code for the PID Controller is available at: [PID Controller Code](https://g
 
 And the complete code that uses this controller and lands the vessel is at: [Complete Landing Code](https://github.com/RazGavrieli/kerbal-space-program---BeresheetLanding/blob/main/vessel_landing.py)
 
-![PID Results](IMAGE URL HERE)
+<img width="578" alt="image" src="https://github.com/RazGavrieli/kerbal-space-program---BeresheetLanding/assets/90526270/d3f7555e-86b1-489d-9847-e6f269adbafa">
 
 We can see that the speed reduces constantly and there are no jumps in speed or thrust. 
 
@@ -124,6 +125,9 @@ This method results in a successful landing with more fuel, and also, we can cha
 
 ## Bonus Section - Land a Rocket SpaceX Style
 Kerbal Space Program has provided us with many preset scenarios. One of those scenarios is landing a rocket back onto Earth after it has launched another vessel. This is done so we can refuel the rocket and use it again in the future!
+  
+<img width="462" alt="image" src="https://github.com/RazGavrieli/kerbal-space-program---BeresheetLanding/assets/90526270/f1ac4f0e-54bf-4605-bcae-31a21cee3644">
+
 
 The landing procedure is similar to the one we practiced in the last session - landing on the moon. Feel free to try it a couple of times manually, go to scenarios and choose the “Powered Landing” scenario. You will be controlling a rocket that is falling back onto earth. Hold SHIFT to increase backward thrust and CTRL to decrease. Notice that the amount of fuel you have available is very small. 
 
@@ -133,7 +137,7 @@ Use this script: [SpaceX Landing Script](https://github.com/RazGavrieli/kerbal-s
 
 Execute the script within the 'Powered Landing' scenario. You will observe that the rocket descends back to Earth with no thrust initially. It's only in the final 500 meters of descent that the engines ignite, providing full thrust to decelerate the rocket. During the last 50 meters, the engine thrust gradually reduces, allowing the rocket to perform a controlled landing.
 
-![SpaceX Results](IMAGE URL HERE)
+<img width="595" alt="image" src="https://github.com/RazGavrieli/kerbal-space-program---BeresheetLanding/assets/90526270/6d579a39-76d1-447d-ac2f-597c64c02300">
 
 Despite significant fluctuation in engine thrust (NN) values towards the end, the vessel's speed consistently decreases.
 
